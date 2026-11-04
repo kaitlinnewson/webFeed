@@ -3,8 +3,8 @@
 /**
  * @file WebFeedGatewayPlugin.php
  *
- * Copyright (c) 2014-2023 Simon Fraser University
- * Copyright (c) 2003-2023 John Willinsky
+ * Copyright (c) 2014-2026 Simon Fraser University
+ * Copyright (c) 2003-2026 John Willinsky
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class WebFeedGatewayPlugin
@@ -168,7 +168,7 @@ class WebFeedGatewayPlugin extends GatewayPlugin
         }
 
         foreach (['keywords' => 'common.keywords', 'subjects' => 'common.subjects', 'disciplines' => 'search.discipline'] as $field => $label) {
-            $values = $publication->getLocalizedData($field) ?? [];
+            $values = collect($publication->getLocalizedData($field) ?? [])->pluck('name')->all();
             if (count($values)) {
                 $identifiers[] = ['type' => $field, 'label' => __($label), 'values' => $values];
             }
